@@ -17,7 +17,7 @@ Each workload runs 5 times on `tenki-standard-medium-4c-8g` and `tenki-standard-
 
 ## What is measured
 
-- **Time**: the job's `started_at → completed_at`. Queue time (`created_at → started_at`) is stored separately.
+- **Time**: the job's `started_at → completed_at`. Queue time is stored separately, measured from when a `max-parallel` slot was free to `started_at`.
 - **Cost**: whole seconds × the list rate per minute in `config.json`, which is how Tenki bills.
 - **Steps**: the duration of every step, so a change can be traced to download or compile time.
 - **Runner**: CPU model, core count and runner name for every sample.

@@ -32,8 +32,8 @@ jobs:
       max-parallel: 4
       matrix:
         # sample first, so each round of 4 covers every workload/size cell once.
-        sample: [1, 2, 3, 4, 5]
-        workload: [ripgrep, docker, citrea]
+        sample: [1]
+        workload: [citrea]
         size: [tenki-standard-medium-4c-8g, tenki-standard-large-8c-16g]
     steps:
       - name: Checkout

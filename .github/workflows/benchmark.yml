@@ -1,0 +1,150 @@
+name: Benchmark
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: benchmark
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  RIPGREP_REF: e89fff89ac9af12e8d4ce9d5fd07beb408ca730f # 15.2.0
+  RUST_TOOLCHAIN: 1.98.1
+  GOLANG_IMAGE: golang:1.23-alpine@sha256:383395b794dffa5b53012a212365d40c8e37109a626ca30d6151c8348d380b5f
+  ALPINE_IMAGE: alpine:3.20@sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc
+
+jobs:
+  bench:
+    # collect.mjs parses this name; keep the "bench / a / b / c" shape.
+    name: bench / ${{ matrix.workload }} / ${{ matrix.size }} / ${{ matrix.sample }}
+    runs-on: ${{ matrix.size }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      # Stays under the default workspace limit of 5 concurrent jobs, shared with sandboxes.
+      max-parallel: 4
+      matrix:
+        # sample first, so each round of 4 covers every workload/size cell once.
+        sample: [1, 2, 3, 4, 5]
+        workload: [ripgrep, docker]
+        size: [tenki-standard-medium-4c-8g, tenki-standard-large-8c-16g]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+
+      - name: Record runner hardware
+        shell: bash
+        run: |
+          mkdir -p meta
+          cpu_model=$(lscpu | sed -n 's/^Model name: *//p' | head -1)
+          printf '{"runnerName":"%s","cpuModel":"%s","cpus":%s}\n' "$RUNNER_NAME" "$cpu_model" "$(nproc)" \
+            > "meta/${{ matrix.workload }}__${{ matrix.size }}__${{ matrix.sample }}.json"
+
+      - name: Checkout ripgrep
+        if: matrix.workload == 'ripgrep'
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          repository: BurntSushi/ripgrep
+          ref: ${{ env.RIPGREP_REF }}
+          path: ripgrep
+          persist-credentials: false
+
+      - name: Install Rust toolchain
+        if: matrix.workload == 'ripgrep'
+        shell: bash
+        run: |
+          if ! command -v rustup >/dev/null; then
+            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain none
+            echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+            export PATH="$HOME/.cargo/bin:$PATH"
+          fi
+          rustup toolchain install "$RUST_TOOLCHAIN" --profile minimal
+
+      # A fresh CARGO_HOME keeps the crate registry cold even if the image ships one.
+      - name: Fetch crates
+        if: matrix.workload == 'ripgrep'
+        working-directory: ripgrep
+        env:
+          CARGO_HOME: ${{ runner.temp }}/cargo-home
+        run: rustup run "$RUST_TOOLCHAIN" cargo fetch --locked
+
+      - name: Build ripgrep
+        if: matrix.workload == 'ripgrep'
+        working-directory: ripgrep
+        env:
+          CARGO_HOME: ${{ runner.temp }}/cargo-home
+        run: rustup run "$RUST_TOOLCHAIN" cargo build --release --locked --offline
+
+      - name: Remove cached base images
+        if: matrix.workload == 'docker'
+        run: docker image rm -f "$GOLANG_IMAGE" "$ALPINE_IMAGE" 2>/dev/null || true
+
+      - name: Pull base images
+        if: matrix.workload == 'docker'
+        run: docker pull "$GOLANG_IMAGE" && docker pull "$ALPINE_IMAGE"
+
+      - name: Build docker image
+        if: matrix.workload == 'docker'
+        run: docker build --no-cache -t tenki-benchmark-docker workloads/docker
+
+      - name: Upload runner metadata
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: meta-${{ matrix.workload }}-${{ matrix.size }}-${{ matrix.sample }}
+          path: meta/
+          retention-days: 7
+
+  collect:
+    needs: bench
+    if: always()
+    # GitHub-hosted, so it never takes one of the workspace's Tenki slots.
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      actions: read
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+
+      - name: Setup Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: 24
+
+      - name: Download runner metadata
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          pattern: meta-*
+          path: meta
+          merge-multiple: true
+
+      - name: Collect results
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/collect.mjs
+
+      - name: Write step summary
+        run: cat summary.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Open results PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          branch="results/${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add results
+          git commit -m "results: run ${GITHUB_RUN_ID}"
+          git push origin "$branch"
+          gh pr create --base "$GITHUB_REF_NAME" --head "$branch" \
+            --title "Benchmark results $(date -u +%F) (run ${GITHUB_RUN_ID})" \
+            --body-file summary.md

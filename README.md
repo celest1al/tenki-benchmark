@@ -11,6 +11,8 @@ Every run builds the same pinned workloads with cold caches, measures each job t
 | `ripgrep` | `cargo build --release --locked` of ripgrep 15.2.0 with Rust 1.98.1 and an empty crate registry. |
 | `docker`  | `docker build --no-cache` of `workloads/docker`, with base images pinned by digest.              |
 
+"Cold" means the workflow uses no cache of its own. Downloads still go through the cache proxy that every Tenki runner uses by default, for example the `tenki-proxy` crate registry.
+
 Each workload runs 5 times on `tenki-standard-medium-4c-8g` and `tenki-standard-large-8c-16g`, 4 jobs at a time.
 
 ## What is measured

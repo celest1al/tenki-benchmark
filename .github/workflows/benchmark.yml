@@ -25,6 +25,7 @@ jobs:
     strategy:
       fail-fast: false
       # Stays under the default workspace limit of 5 concurrent jobs, shared with sandboxes.
+      # Keep in sync with maxParallel in config.json.
       max-parallel: 4
       matrix:
         # sample first, so each round of 4 covers every workload/size cell once.

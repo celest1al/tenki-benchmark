@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { summarize } from "./stats.mjs";
 import { compare } from "./compare.mjs";
 import { render } from "./render.mjs";
+import { queueSeconds } from "./queue.mjs";
 
 const { GITHUB_TOKEN, GITHUB_REPOSITORY, GITHUB_RUN_ID, GITHUB_RUN_ATTEMPT, GITHUB_SHA, GITHUB_SERVER_URL } =
   process.env;
@@ -32,7 +33,7 @@ function readMeta(workload, size, sample) {
   return existsSync(file) ? JSON.parse(readFileSync(file, "utf8")) : null;
 }
 
-function toSample(job) {
+function toSample(job, queue) {
   // Job names are "bench / <workload> / <size> / <sample>", set in benchmark.yml.
   const [, workload, size, sample] = job.name.split(" / ");
   const durationSeconds = seconds(job.started_at, job.completed_at);
@@ -46,7 +47,7 @@ function toSample(job) {
     sample: Number(sample),
     status: job.conclusion,
     jobUrl: job.html_url,
-    queueSeconds: seconds(job.created_at, job.started_at),
+    queueSeconds: queue.get(job.id) ?? null,
     durationSeconds,
     // Tenki bills whole seconds of started_at → completed_at, truncated.
     costUsd: durationSeconds === null || rate === undefined ? null : (Math.floor(durationSeconds) * rate) / 60,
@@ -72,9 +73,10 @@ function readHistory() {
 const jobs = (await listJobs()).filter((j) => j.name.startsWith("bench / "));
 if (jobs.length === 0) throw new Error("no bench jobs found in this run");
 
-const samples = jobs.map(toSample).sort((a, b) =>
-  `${a.workload}${a.size}${a.sample}`.localeCompare(`${b.workload}${b.size}${b.sample}`),
-);
+const queue = queueSeconds(jobs, config.maxParallel);
+const samples = jobs
+  .map((j) => toSample(j, queue))
+  .sort((a, b) => `${a.workload}${a.size}${a.sample}`.localeCompare(`${b.workload}${b.size}${b.sample}`));
 const cells = compare(summarize(samples, config.stats), readHistory(), config.baseline);
 
 const createdAt = new Date().toISOString();

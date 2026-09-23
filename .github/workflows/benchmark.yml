@@ -13,6 +13,9 @@ permissions:
 env:
   RIPGREP_REF: e89fff89ac9af12e8d4ce9d5fd07beb408ca730f # 15.2.0
   RUST_TOOLCHAIN: 1.98.1
+  CITREA_REF: a62deb7a383b85d7961952d55b146949653c40ca # v2.8.0
+  RISC0_VERSION: 3.0.3
+  RISC0_RUST: 1.88.0
   GOLANG_IMAGE: golang:1.23-alpine@sha256:383395b794dffa5b53012a212365d40c8e37109a626ca30d6151c8348d380b5f
   ALPINE_IMAGE: alpine:3.20@sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc
 
@@ -21,7 +24,7 @@ jobs:
     # collect.mjs parses this name; keep the "bench / a / b / c" shape.
     name: bench / ${{ matrix.workload }} / ${{ matrix.size }} / ${{ matrix.sample }}
     runs-on: ${{ matrix.size }}
-    timeout-minutes: 30
+    timeout-minutes: 90
     strategy:
       fail-fast: false
       # Stays under the default workspace limit of 5 concurrent jobs, shared with sandboxes.
@@ -30,7 +33,7 @@ jobs:
       matrix:
         # sample first, so each round of 4 covers every workload/size cell once.
         sample: [1, 2, 3, 4, 5]
-        workload: [ripgrep, docker]
+        workload: [ripgrep, docker, citrea]
         size: [tenki-standard-medium-4c-8g, tenki-standard-large-8c-16g]
     steps:
       - name: Checkout
@@ -45,6 +48,7 @@ jobs:
           cpu_model=$(lscpu | sed -n 's/^Model name: *//p' | head -1)
           printf '{"runnerName":"%s","cpuModel":"%s","cpus":%s}\n' "$RUNNER_NAME" "$cpu_model" "$(nproc)" \
             > "meta/${{ matrix.workload }}__${{ matrix.size }}__${{ matrix.sample }}.json"
+          df -h / "$RUNNER_TEMP"
 
       - name: Checkout ripgrep
         if: matrix.workload == 'ripgrep'
@@ -80,6 +84,65 @@ jobs:
         env:
           CARGO_HOME: ${{ runner.temp }}/cargo-home
         run: rustup run "$RUST_TOOLCHAIN" cargo build --release --locked --offline
+
+      - name: Checkout citrea
+        if: matrix.workload == 'citrea'
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          repository: chainwayxyz/citrea
+          ref: ${{ env.CITREA_REF }}
+          path: citrea
+          persist-credentials: false
+
+      # Mirrors citrea's own CI build job (checks.yml), without its caches.
+      - name: Setup mold
+        if: matrix.workload == 'citrea'
+        uses: rui314/setup-mold@9c9c13bf4c3f1adef0cc596abc155580bcb04444 # v1
+
+      - name: Install citrea Rust toolchain
+        if: matrix.workload == 'citrea'
+        working-directory: citrea
+        shell: bash
+        run: |
+          if ! command -v rustup >/dev/null; then
+            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain none
+            echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+            export PATH="$HOME/.cargo/bin:$PATH"
+          fi
+          # Installs the channel and components from citrea's rust-toolchain.toml.
+          rustup toolchain install
+
+      - name: Install risc0
+        if: matrix.workload == 'citrea'
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          curl -L https://risczero.com/install | bash
+          export PATH="$PATH:$HOME/.risc0/bin"
+          echo "$HOME/.risc0/bin" >> "$GITHUB_PATH"
+          rzup install cargo-risczero "$RISC0_VERSION"
+          rzup install cpp
+          rzup install r0vm "$RISC0_VERSION"
+          rzup install rust "$RISC0_RUST"
+          rzup default cargo-risczero "$RISC0_VERSION"
+          rzup default r0vm "$RISC0_VERSION"
+          rzup default rust "$RISC0_RUST"
+
+      - name: Fetch citrea crates
+        if: matrix.workload == 'citrea'
+        working-directory: citrea
+        env:
+          CARGO_HOME: ${{ runner.temp }}/cargo-home
+        run: cargo fetch --locked
+
+      # Not --offline: the guest builds resolve their own crates.
+      - name: Build citrea
+        if: matrix.workload == 'citrea'
+        working-directory: citrea
+        env:
+          CARGO_HOME: ${{ runner.temp }}/cargo-home
+        run: make build
 
       - name: Remove cached base images
         if: matrix.workload == 'docker'

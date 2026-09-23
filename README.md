@@ -6,10 +6,11 @@ Every run builds the same pinned workloads with cold caches, measures each job t
 
 ## What runs
 
-| Workload  | What it does                                                                                     |
-| --------- | ------------------------------------------------------------------------------------------------ |
-| `ripgrep` | `cargo build --release --locked` of ripgrep 15.2.0 with Rust 1.98.1 and an empty crate registry. |
-| `docker`  | `docker build --no-cache` of `workloads/docker`, with base images pinned by digest.              |
+| Workload  | What it does                                                                                                   |
+| --------- | -------------------------------------------------------------------------------------------------------------- |
+| `ripgrep` | `cargo build --release --locked` of ripgrep 15.2.0 with Rust 1.98.1 and an empty crate registry.               |
+| `docker`  | `docker build --no-cache` of `workloads/docker`, with base images pinned by digest.                            |
+| `citrea`  | citrea v2.8.0's own CI build (`make build` with mold and risc0 3.0.3), including the RISC Zero guest programs. |
 
 "Cold" means the workflow uses no cache of its own. Downloads still go through the cache proxy that every Tenki runner uses by default, for example the `tenki-proxy` crate registry.
 

@@ -1,0 +1,1994 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-09-23T11:41:22.091Z",
+  "runId": 35855725015,
+  "runAttempt": 1,
+  "runUrl": "https://github.com/celest1al/tenki-benchmark/actions/runs/35855725015",
+  "commit": "a12aa1467b11914cb76f849049061304f2a3a710",
+  "pricing": {
+    "source": "provisional list rates ($0.002/core/min), 2026-09-23",
+    "granularity": "second",
+    "ratesPerMinuteUsd": {
+      "tenki-standard-medium-4c-8g": 0.008,
+      "tenki-standard-large-8c-16g": 0.016
+    }
+  },
+  "cells": [
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "docker",
+      "size": "tenki-standard-large-8c-16g",
+      "samples": 5,
+      "succeeded": 5,
+      "medianSeconds": 17,
+      "minSeconds": 16,
+      "maxSeconds": 19,
+      "p90Seconds": 18.6,
+      "cv": 0.0586094196964688,
+      "noisy": false,
+      "medianCostUsd": 0.004533333333333334,
+      "medianQueueSeconds": 3,
+      "comparison": {
+        "status": "insufficient",
+        "baselineRuns": 0,
+        "minRuns": 4
+      }
+    },
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "docker",
+      "size": "tenki-standard-medium-4c-8g",
+      "samples": 5,
+      "succeeded": 5,
+      "medianSeconds": 19,
+      "minSeconds": 18,
+      "maxSeconds": 27,
+      "p90Seconds": 24.200000000000003,
+      "cv": 0.1657993580910565,
+      "noisy": true,
+      "medianCostUsd": 0.002533333333333333,
+      "medianQueueSeconds": 2,
+      "comparison": {
+        "status": "insufficient",
+        "baselineRuns": 0,
+        "minRuns": 4
+      }
+    },
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "ripgrep",
+      "size": "tenki-standard-large-8c-16g",
+      "samples": 5,
+      "succeeded": 5,
+      "medianSeconds": 25,
+      "minSeconds": 22,
+      "maxSeconds": 27,
+      "p90Seconds": 26.6,
+      "cv": 0.06693280212272605,
+      "noisy": false,
+      "medianCostUsd": 0.006666666666666667,
+      "medianQueueSeconds": 2,
+      "comparison": {
+        "status": "insufficient",
+        "baselineRuns": 0,
+        "minRuns": 4
+      }
+    },
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "ripgrep",
+      "size": "tenki-standard-medium-4c-8g",
+      "samples": 5,
+      "succeeded": 5,
+      "medianSeconds": 31,
+      "minSeconds": 30,
+      "maxSeconds": 32,
+      "p90Seconds": 32,
+      "cv": 0.023984983248550903,
+      "noisy": false,
+      "medianCostUsd": 0.0041333333333333335,
+      "medianQueueSeconds": 2,
+      "comparison": {
+        "status": "insufficient",
+        "baselineRuns": 0,
+        "minRuns": 4
+      }
+    }
+  ],
+  "samples": [
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "docker",
+      "size": "tenki-standard-large-8c-16g",
+      "sample": 1,
+      "status": "success",
+      "jobUrl": "https://github.com/celest1al/tenki-benchmark/actions/runs/35855725015/job/107163610571",
+      "queueSeconds": 12,
+      "durationSeconds": 17,
+      "costUsd": 0.004533333333333334,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Set up runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Record runner hardware",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout ripgrep",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Install Rust toolchain",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Fetch crates",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Build ripgrep",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Remove cached base images",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Pull base images",
+          "conclusion": "success",
+          "durationSeconds": 4
+        },
+        {
+          "name": "Build docker image",
+          "conclusion": "success",
+          "durationSeconds": 5
+        },
+        {
+          "name": "Upload runner metadata",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Post Checkout",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        }
+      ],
+      "runnerName": "tenki-sandbox-5dfe5d47-1c82-4f97-bfbd-de3a29543085",
+      "cpuModel": "AMD Ryzen 9 7950X3D 16-Core Processor",
+      "cpus": 8
+    },
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "docker",
+      "size": "tenki-standard-large-8c-16g",
+      "sample": 2,
+      "status": "success",
+      "jobUrl": "https://github.com/celest1al/tenki-benchmark/actions/runs/35855725015/job/107163610619",
+      "queueSeconds": 3,
+      "durationSeconds": 17,
+      "costUsd": 0.004533333333333334,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Set up runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Record runner hardware",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout ripgrep",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Install Rust toolchain",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Fetch crates",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Build ripgrep",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Remove cached base images",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Pull base images",
+          "conclusion": "success",
+          "durationSeconds": 4
+        },
+        {
+          "name": "Build docker image",
+          "conclusion": "success",
+          "durationSeconds": 5
+        },
+        {
+          "name": "Upload runner metadata",
+          "conclusion": "success",
+          "durationSeconds": 2
+        },
+        {
+          "name": "Post Checkout",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        }
+      ],
+      "runnerName": "tenki-sandbox-45f7c701-33c6-4ebb-973c-bf272fa20e18",
+      "cpuModel": "AMD Ryzen 9 7950X3D 16-Core Processor",
+      "cpus": 8
+    },
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "docker",
+      "size": "tenki-standard-large-8c-16g",
+      "sample": 3,
+      "status": "success",
+      "jobUrl": "https://github.com/celest1al/tenki-benchmark/actions/runs/35855725015/job/107163610598",
+      "queueSeconds": 2,
+      "durationSeconds": 16,
+      "costUsd": 0.004266666666666667,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Set up runner",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Checkout",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Record runner hardware",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout ripgrep",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Install Rust toolchain",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Fetch crates",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Build ripgrep",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Remove cached base images",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Pull base images",
+          "conclusion": "success",
+          "durationSeconds": 4
+        },
+        {
+          "name": "Build docker image",
+          "conclusion": "success",
+          "durationSeconds": 5
+        },
+        {
+          "name": "Upload runner metadata",
+          "conclusion": "success",
+          "durationSeconds": 2
+        },
+        {
+          "name": "Post Checkout",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        }
+      ],
+      "runnerName": "tenki-sandbox-d9e585dc-1392-47c0-b5d4-5644749321f5",
+      "cpuModel": "AMD Ryzen 9 7950X3D 16-Core Processor",
+      "cpus": 8
+    },
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "docker",
+      "size": "tenki-standard-large-8c-16g",
+      "sample": 4,
+      "status": "success",
+      "jobUrl": "https://github.com/celest1al/tenki-benchmark/actions/runs/35855725015/job/107163612101",
+      "queueSeconds": 2,
+      "durationSeconds": 19,
+      "costUsd": 0.005066666666666666,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Set up runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Record runner hardware",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout ripgrep",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Install Rust toolchain",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Fetch crates",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Build ripgrep",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Remove cached base images",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Pull base images",
+          "conclusion": "success",
+          "durationSeconds": 4
+        },
+        {
+          "name": "Build docker image",
+          "conclusion": "success",
+          "durationSeconds": 6
+        },
+        {
+          "name": "Upload runner metadata",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Post Checkout",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        }
+      ],
+      "runnerName": "tenki-sandbox-30613f27-79ad-4c5d-837c-5a32b25de870",
+      "cpuModel": "AMD Ryzen 9 7950X3D 16-Core Processor",
+      "cpus": 8
+    },
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "docker",
+      "size": "tenki-standard-large-8c-16g",
+      "sample": 5,
+      "status": "success",
+      "jobUrl": "https://github.com/celest1al/tenki-benchmark/actions/runs/35855725015/job/107163612182",
+      "queueSeconds": 8,
+      "durationSeconds": 18,
+      "costUsd": 0.0048000000000000004,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Set up runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Record runner hardware",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout ripgrep",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Install Rust toolchain",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Fetch crates",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Build ripgrep",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Remove cached base images",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Pull base images",
+          "conclusion": "success",
+          "durationSeconds": 4
+        },
+        {
+          "name": "Build docker image",
+          "conclusion": "success",
+          "durationSeconds": 6
+        },
+        {
+          "name": "Upload runner metadata",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Post Checkout",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        }
+      ],
+      "runnerName": "tenki-sandbox-6b6f63dc-f00d-443a-8113-bbc31662f1a0",
+      "cpuModel": "AMD Ryzen 9 7950X3D 16-Core Processor",
+      "cpus": 8
+    },
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "docker",
+      "size": "tenki-standard-medium-4c-8g",
+      "sample": 1,
+      "status": "success",
+      "jobUrl": "https://github.com/celest1al/tenki-benchmark/actions/runs/35855725015/job/107163610643",
+      "queueSeconds": 12,
+      "durationSeconds": 18,
+      "costUsd": 0.0024000000000000002,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Set up runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Record runner hardware",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout ripgrep",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Install Rust toolchain",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Fetch crates",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Build ripgrep",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Remove cached base images",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Pull base images",
+          "conclusion": "success",
+          "durationSeconds": 4
+        },
+        {
+          "name": "Build docker image",
+          "conclusion": "success",
+          "durationSeconds": 6
+        },
+        {
+          "name": "Upload runner metadata",
+          "conclusion": "success",
+          "durationSeconds": 2
+        },
+        {
+          "name": "Post Checkout",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        }
+      ],
+      "runnerName": "tenki-sandbox-91c89f0d-5edf-49f4-ad53-8888dca24aa2",
+      "cpuModel": "AMD Ryzen 9 7950X3D 16-Core Processor",
+      "cpus": 4
+    },
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "docker",
+      "size": "tenki-standard-medium-4c-8g",
+      "sample": 2,
+      "status": "success",
+      "jobUrl": "https://github.com/celest1al/tenki-benchmark/actions/runs/35855725015/job/107163610573",
+      "queueSeconds": 2,
+      "durationSeconds": 18,
+      "costUsd": 0.0024000000000000002,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Set up runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Record runner hardware",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout ripgrep",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Install Rust toolchain",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Fetch crates",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Build ripgrep",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Remove cached base images",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Pull base images",
+          "conclusion": "success",
+          "durationSeconds": 3
+        },
+        {
+          "name": "Build docker image",
+          "conclusion": "success",
+          "durationSeconds": 7
+        },
+        {
+          "name": "Upload runner metadata",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Post Checkout",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        }
+      ],
+      "runnerName": "tenki-sandbox-e534819c-031f-4f46-945f-436246442fd1",
+      "cpuModel": "AMD Ryzen 9 7950X3D 16-Core Processor",
+      "cpus": 4
+    },
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "docker",
+      "size": "tenki-standard-medium-4c-8g",
+      "sample": 3,
+      "status": "success",
+      "jobUrl": "https://github.com/celest1al/tenki-benchmark/actions/runs/35855725015/job/107163610602",
+      "queueSeconds": 2,
+      "durationSeconds": 19,
+      "costUsd": 0.002533333333333333,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Set up runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Record runner hardware",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout ripgrep",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Install Rust toolchain",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Fetch crates",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Build ripgrep",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Remove cached base images",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Pull base images",
+          "conclusion": "success",
+          "durationSeconds": 4
+        },
+        {
+          "name": "Build docker image",
+          "conclusion": "success",
+          "durationSeconds": 9
+        },
+        {
+          "name": "Upload runner metadata",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Post Checkout",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        }
+      ],
+      "runnerName": "tenki-sandbox-b9e2716a-3aab-4644-8bc5-ed2dc3b61083",
+      "cpuModel": "AMD EPYC 7B13 64-Core Processor",
+      "cpus": 4
+    },
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "docker",
+      "size": "tenki-standard-medium-4c-8g",
+      "sample": 4,
+      "status": "success",
+      "jobUrl": "https://github.com/celest1al/tenki-benchmark/actions/runs/35855725015/job/107163612090",
+      "queueSeconds": 2,
+      "durationSeconds": 20,
+      "costUsd": 0.0026666666666666666,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Set up runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Record runner hardware",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout ripgrep",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Install Rust toolchain",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Fetch crates",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Build ripgrep",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Remove cached base images",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Pull base images",
+          "conclusion": "success",
+          "durationSeconds": 5
+        },
+        {
+          "name": "Build docker image",
+          "conclusion": "success",
+          "durationSeconds": 7
+        },
+        {
+          "name": "Upload runner metadata",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Post Checkout",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        }
+      ],
+      "runnerName": "tenki-sandbox-fa33038f-16f6-40d1-a2d1-d239459a80ef",
+      "cpuModel": "AMD Ryzen 9 7950X3D 16-Core Processor",
+      "cpus": 4
+    },
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "docker",
+      "size": "tenki-standard-medium-4c-8g",
+      "sample": 5,
+      "status": "success",
+      "jobUrl": "https://github.com/celest1al/tenki-benchmark/actions/runs/35855725015/job/107163612157",
+      "queueSeconds": 5,
+      "durationSeconds": 27,
+      "costUsd": 0.0036,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Set up runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout",
+          "conclusion": "success",
+          "durationSeconds": 2
+        },
+        {
+          "name": "Record runner hardware",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout ripgrep",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Install Rust toolchain",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Fetch crates",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Build ripgrep",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Remove cached base images",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Pull base images",
+          "conclusion": "success",
+          "durationSeconds": 8
+        },
+        {
+          "name": "Build docker image",
+          "conclusion": "success",
+          "durationSeconds": 10
+        },
+        {
+          "name": "Upload runner metadata",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Post Checkout",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Complete runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        }
+      ],
+      "runnerName": "tenki-sandbox-fe5fe965-4d3a-48d7-9ab1-e42c3445b807",
+      "cpuModel": "AMD Ryzen 9 7950X3D 16-Core Processor",
+      "cpus": 4
+    },
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "ripgrep",
+      "size": "tenki-standard-large-8c-16g",
+      "sample": 1,
+      "status": "success",
+      "jobUrl": "https://github.com/celest1al/tenki-benchmark/actions/runs/35855725015/job/107163610540",
+      "queueSeconds": 12,
+      "durationSeconds": 26,
+      "costUsd": 0.006933333333333334,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Set up runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Record runner hardware",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Install Rust toolchain",
+          "conclusion": "success",
+          "durationSeconds": 6
+        },
+        {
+          "name": "Fetch crates",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Build ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 8
+        },
+        {
+          "name": "Remove cached base images",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Pull base images",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Build docker image",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Upload runner metadata",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Post Checkout ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Post Checkout",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        }
+      ],
+      "runnerName": "tenki-sandbox-1887cd0d-a61f-41ae-9180-6336c8176451",
+      "cpuModel": "AMD Ryzen 9 7950X3D 16-Core Processor",
+      "cpus": 8
+    },
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "ripgrep",
+      "size": "tenki-standard-large-8c-16g",
+      "sample": 2,
+      "status": "success",
+      "jobUrl": "https://github.com/celest1al/tenki-benchmark/actions/runs/35855725015/job/107163610670",
+      "queueSeconds": 2,
+      "durationSeconds": 22,
+      "costUsd": 0.005866666666666667,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Set up runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Record runner hardware",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Install Rust toolchain",
+          "conclusion": "success",
+          "durationSeconds": 6
+        },
+        {
+          "name": "Fetch crates",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Build ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 8
+        },
+        {
+          "name": "Remove cached base images",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Pull base images",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Build docker image",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Upload runner metadata",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Post Checkout ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Post Checkout",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        }
+      ],
+      "runnerName": "tenki-sandbox-b168418b-ce45-4abf-b590-e83ef75891de",
+      "cpuModel": "AMD EPYC 7B13 64-Core Processor",
+      "cpus": 8
+    },
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "ripgrep",
+      "size": "tenki-standard-large-8c-16g",
+      "sample": 3,
+      "status": "success",
+      "jobUrl": "https://github.com/celest1al/tenki-benchmark/actions/runs/35855725015/job/107163610541",
+      "queueSeconds": 2,
+      "durationSeconds": 25,
+      "costUsd": 0.006666666666666667,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Set up runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Record runner hardware",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Install Rust toolchain",
+          "conclusion": "success",
+          "durationSeconds": 6
+        },
+        {
+          "name": "Fetch crates",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Build ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 8
+        },
+        {
+          "name": "Remove cached base images",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Pull base images",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Build docker image",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Upload runner metadata",
+          "conclusion": "success",
+          "durationSeconds": 2
+        },
+        {
+          "name": "Post Checkout ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Post Checkout",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        }
+      ],
+      "runnerName": "tenki-sandbox-8f8942cf-cf75-4c6e-b385-cc120f103ea5",
+      "cpuModel": "AMD Ryzen 9 7950X3D 16-Core Processor",
+      "cpus": 8
+    },
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "ripgrep",
+      "size": "tenki-standard-large-8c-16g",
+      "sample": 4,
+      "status": "success",
+      "jobUrl": "https://github.com/celest1al/tenki-benchmark/actions/runs/35855725015/job/107163610455",
+      "queueSeconds": 2,
+      "durationSeconds": 25,
+      "costUsd": 0.006666666666666667,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Set up runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Record runner hardware",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Install Rust toolchain",
+          "conclusion": "success",
+          "durationSeconds": 6
+        },
+        {
+          "name": "Fetch crates",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Build ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 11
+        },
+        {
+          "name": "Remove cached base images",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Pull base images",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Build docker image",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Upload runner metadata",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Post Checkout ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Post Checkout",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        }
+      ],
+      "runnerName": "tenki-sandbox-d5cce40e-14a0-4322-a142-26a0a2faabe6",
+      "cpuModel": "AMD EPYC 7B13 64-Core Processor",
+      "cpus": 8
+    },
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "ripgrep",
+      "size": "tenki-standard-large-8c-16g",
+      "sample": 5,
+      "status": "success",
+      "jobUrl": "https://github.com/celest1al/tenki-benchmark/actions/runs/35855725015/job/107163612258",
+      "queueSeconds": 3,
+      "durationSeconds": 27,
+      "costUsd": 0.0072,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Set up runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Record runner hardware",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Install Rust toolchain",
+          "conclusion": "success",
+          "durationSeconds": 6
+        },
+        {
+          "name": "Fetch crates",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Build ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 10
+        },
+        {
+          "name": "Remove cached base images",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Pull base images",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Build docker image",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Upload runner metadata",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Post Checkout ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Post Checkout",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        }
+      ],
+      "runnerName": "tenki-sandbox-2a02f46a-35d2-4abe-9a4b-6e2f10124462",
+      "cpuModel": "AMD Ryzen 9 7950X3D 16-Core Processor",
+      "cpus": 8
+    },
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "ripgrep",
+      "size": "tenki-standard-medium-4c-8g",
+      "sample": 1,
+      "status": "success",
+      "jobUrl": "https://github.com/celest1al/tenki-benchmark/actions/runs/35855725015/job/107163610210",
+      "queueSeconds": 12,
+      "durationSeconds": 31,
+      "costUsd": 0.0041333333333333335,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Set up runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Record runner hardware",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Install Rust toolchain",
+          "conclusion": "success",
+          "durationSeconds": 6
+        },
+        {
+          "name": "Fetch crates",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Build ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 14
+        },
+        {
+          "name": "Remove cached base images",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Pull base images",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Build docker image",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Upload runner metadata",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Post Checkout ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Post Checkout",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        }
+      ],
+      "runnerName": "tenki-sandbox-4833f9f6-7909-48e3-bd39-e54be00faafa",
+      "cpuModel": "AMD Ryzen 9 7950X3D 16-Core Processor",
+      "cpus": 4
+    },
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "ripgrep",
+      "size": "tenki-standard-medium-4c-8g",
+      "sample": 2,
+      "status": "success",
+      "jobUrl": "https://github.com/celest1al/tenki-benchmark/actions/runs/35855725015/job/107163610440",
+      "queueSeconds": 2,
+      "durationSeconds": 31,
+      "costUsd": 0.0041333333333333335,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Set up runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Record runner hardware",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Install Rust toolchain",
+          "conclusion": "success",
+          "durationSeconds": 6
+        },
+        {
+          "name": "Fetch crates",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Build ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 14
+        },
+        {
+          "name": "Remove cached base images",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Pull base images",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Build docker image",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Upload runner metadata",
+          "conclusion": "success",
+          "durationSeconds": 2
+        },
+        {
+          "name": "Post Checkout ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Post Checkout",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        }
+      ],
+      "runnerName": "tenki-sandbox-0788a103-e001-49da-b0cf-9ad90f1a6df1",
+      "cpuModel": "AMD Ryzen 9 7950X3D 16-Core Processor",
+      "cpus": 4
+    },
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "ripgrep",
+      "size": "tenki-standard-medium-4c-8g",
+      "sample": 3,
+      "status": "success",
+      "jobUrl": "https://github.com/celest1al/tenki-benchmark/actions/runs/35855725015/job/107163610557",
+      "queueSeconds": 2,
+      "durationSeconds": 30,
+      "costUsd": 0.004,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Set up runner",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Checkout",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Record runner hardware",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Install Rust toolchain",
+          "conclusion": "success",
+          "durationSeconds": 6
+        },
+        {
+          "name": "Fetch crates",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Build ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 16
+        },
+        {
+          "name": "Remove cached base images",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Pull base images",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Build docker image",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Upload runner metadata",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Post Checkout ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Post Checkout",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Complete runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        }
+      ],
+      "runnerName": "tenki-sandbox-085c5c19-66ac-4db8-9df0-73618f387708",
+      "cpuModel": "AMD EPYC 7B13 64-Core Processor",
+      "cpus": 4
+    },
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "ripgrep",
+      "size": "tenki-standard-medium-4c-8g",
+      "sample": 4,
+      "status": "success",
+      "jobUrl": "https://github.com/celest1al/tenki-benchmark/actions/runs/35855725015/job/107163610484",
+      "queueSeconds": 2,
+      "durationSeconds": 32,
+      "costUsd": 0.004266666666666667,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Set up runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Record runner hardware",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Install Rust toolchain",
+          "conclusion": "success",
+          "durationSeconds": 6
+        },
+        {
+          "name": "Fetch crates",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Build ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 17
+        },
+        {
+          "name": "Remove cached base images",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Pull base images",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Build docker image",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Upload runner metadata",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Post Checkout ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Post Checkout",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Complete runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        }
+      ],
+      "runnerName": "tenki-sandbox-0dfeba09-bbff-4ceb-b1b6-c82410fc48ee",
+      "cpuModel": "AMD EPYC 7B13 64-Core Processor",
+      "cpus": 4
+    },
+    {
+      "provider": "tenki",
+      "cache": "cold",
+      "workload": "ripgrep",
+      "size": "tenki-standard-medium-4c-8g",
+      "sample": 5,
+      "status": "success",
+      "jobUrl": "https://github.com/celest1al/tenki-benchmark/actions/runs/35855725015/job/107163612145",
+      "queueSeconds": 6,
+      "durationSeconds": 32,
+      "costUsd": 0.004266666666666667,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Set up runner",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Record runner hardware",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Checkout ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Install Rust toolchain",
+          "conclusion": "success",
+          "durationSeconds": 6
+        },
+        {
+          "name": "Fetch crates",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Build ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 16
+        },
+        {
+          "name": "Remove cached base images",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Pull base images",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Build docker image",
+          "conclusion": "skipped",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Upload runner metadata",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Post Checkout ripgrep",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Post Checkout",
+          "conclusion": "success",
+          "durationSeconds": 0
+        },
+        {
+          "name": "Complete runner",
+          "conclusion": "success",
+          "durationSeconds": 1
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "durationSeconds": 0
+        }
+      ],
+      "runnerName": "tenki-sandbox-fabf517c-4271-46b3-9cf3-fc21a6288ddc",
+      "cpuModel": "AMD EPYC 7B13 64-Core Processor",
+      "cpus": 4
+    }
+  ]
+}

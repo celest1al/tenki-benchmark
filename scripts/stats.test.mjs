@@ -59,3 +59,15 @@ test("a cell where every sample failed has no median", () => {
   assert.equal(cell.cv, null);
   assert.equal(cell.noisy, false);
 });
+
+test("a workload can override the noise threshold", () => {
+  const spread = [sample({ durationSeconds: 26 }), sample({ durationSeconds: 34 })];
+  const stats = { noiseCv: 0.1, noiseCvByWorkload: { ripgrep: 0.15 } };
+  const [ripgrep] = summarize(spread, stats);
+  const [citrea] = summarize(
+    spread.map((s) => ({ ...s, workload: "citrea" })),
+    stats,
+  );
+  assert.equal(ripgrep.noisy, false);
+  assert.equal(citrea.noisy, true);
+});

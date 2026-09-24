@@ -23,7 +23,7 @@ Each workload runs 5 times on `tenki-standard-medium-4c-8g` and `tenki-standard-
 - **Steps**: the duration of every step, so a change can be traced to download or compile time.
 - **Runner**: CPU model, core count and runner name for every sample.
 
-Each cell reports the median, min, max, p90 and coefficient of variation (CV). A cell whose CV is above `stats.noiseCv` is marked noisy and should not be published.
+Each cell reports the median, min, max, p90 and coefficient of variation (CV). A cell whose CV is above `stats.noiseCv` (10%) is marked noisy and should not be published. `stats.noiseCvByWorkload` raises the limit to 15% for `ripgrep` and `docker`, which take about 20 s, so a 2–3 s difference between runner CPUs moves their CV a lot.
 
 The pull request also compares every median with the last 8 runs. A cell is marked as a possible regression when its median is above that range in two runs in a row. The comparison starts after 4 runs.
 

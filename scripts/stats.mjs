@@ -20,7 +20,7 @@ export function cv(values) {
 
 export const cellKey = (s) => [s.provider, s.cache, s.workload, s.size].join("|");
 
-export function summarize(samples, { noiseCv }) {
+export function summarize(samples, { noiseCv, noiseCvByWorkload = {} }) {
   const cells = new Map();
   for (const s of samples) {
     if (!cells.has(cellKey(s))) cells.set(cellKey(s), []);
@@ -43,7 +43,7 @@ export function summarize(samples, { noiseCv }) {
       maxSeconds: durations.length ? Math.max(...durations) : null,
       p90Seconds: quantile(durations, 0.9),
       cv: spread,
-      noisy: spread !== null && spread > noiseCv,
+      noisy: spread !== null && spread > (noiseCvByWorkload[workload] ?? noiseCv),
       medianCostUsd: median(ok.map((s) => s.costUsd)),
       medianQueueSeconds: median(ok.map((s) => s.queueSeconds)),
     };

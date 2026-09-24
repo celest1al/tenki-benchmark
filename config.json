@@ -9,7 +9,11 @@
     }
   },
   "stats": {
-    "noiseCv": 0.1
+    "noiseCv": 0.1,
+    "noiseCvByWorkload": {
+      "ripgrep": 0.15,
+      "docker": 0.15
+    }
   },
   "baseline": {
     "window": 8,

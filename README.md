@@ -6,13 +6,14 @@ Every run builds the same pinned workloads with cold caches, measures each job t
 
 ## What runs
 
-| Workload  | What it does                                                                                                   |
-| --------- | -------------------------------------------------------------------------------------------------------------- |
-| `ripgrep` | `cargo build --release --locked` of ripgrep 15.2.0 with Rust 1.98.1 and an empty crate registry.               |
-| `docker`  | `docker build --no-cache` of `workloads/docker`, with base images pinned by digest.                            |
-| `citrea`  | citrea v2.8.0's own CI build (`make build` with mold and risc0 3.0.3), including the RISC Zero guest programs. |
+| Workload  | What it does                                                                                                                                                 |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ripgrep` | `cargo build --release --locked` of ripgrep 15.2.0 with Rust 1.98.1 and an empty crate registry.                                                             |
+| `docker`  | `docker build --no-cache` of `workloads/docker`, with base images pinned by digest.                                                                          |
+| `citrea`  | citrea v2.8.0's own CI build (`make build` with mold and risc0 3.0.3), including the RISC Zero guest programs.                                               |
+| `n8n`     | n8n 2.40.6's own CI build (`pnpm install --frozen-lockfile` and `pnpm build` with Node 26.5.1 and pnpm 12.3.4), with an empty pnpm store and no turbo cache. |
 
-"Cold" means the workflow uses no cache of its own. Downloads still go through the cache proxy that every Tenki runner uses by default, for example the `tenki-proxy` crate registry.
+"Cold" means the workflow uses no cache of its own. Downloads still go through the cache proxy that every Tenki runner uses by default, for example the `tenki-proxy` crate registry. The n8n workload leaves out SafeChain, the supply-chain scanner that n8n's CI puts in front of pnpm.
 
 Each workload runs 5 times on `tenki-standard-medium-4c-8g` and `tenki-standard-large-8c-16g`, 4 jobs at a time.
 

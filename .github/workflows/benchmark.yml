@@ -175,6 +175,8 @@ jobs:
         working-directory: n8n
         env:
           npm_config_store_dir: ${{ runner.temp }}/pnpm-store
+          # @vscode/ripgrep's postinstall downloads from GitHub and is rate-limited without a token.
+          GITHUB_TOKEN: ${{ github.token }}
         run: pnpm install --frozen-lockfile
 
       - name: Build n8n

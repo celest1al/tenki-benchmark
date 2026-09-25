@@ -16,6 +16,9 @@ env:
   CITREA_REF: a62deb7a383b85d7961952d55b146949653c40ca # v2.8.0
   RISC0_VERSION: 3.0.3
   RISC0_RUST: 1.88.0
+  N8N_REF: 024ee46bdc6d57e5c47ef2c26bcac2b3a9efd827 # n8n@2.40.6
+  N8N_NODE: 26.5.1
+  N8N_PNPM: 12.3.4
   GOLANG_IMAGE: golang:1.23-alpine@sha256:383395b794dffa5b53012a212365d40c8e37109a626ca30d6151c8348d380b5f
   ALPINE_IMAGE: alpine:3.20@sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc
 
@@ -33,7 +36,7 @@ jobs:
       matrix:
         # sample first, so each round of 4 covers every workload/size cell once.
         sample: [1, 2, 3, 4, 5]
-        workload: [ripgrep, docker, citrea]
+        workload: [ripgrep, docker, citrea, n8n]
         size: [tenki-standard-medium-4c-8g, tenki-standard-large-8c-16g]
     steps:
       - name: Checkout
@@ -143,6 +146,45 @@ jobs:
         env:
           CARGO_HOME: ${{ runner.temp }}/cargo-home
         run: make build
+
+      - name: Checkout n8n
+        if: matrix.workload == 'n8n'
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          repository: n8n-io/n8n
+          ref: ${{ env.N8N_REF }}
+          path: n8n
+          persist-credentials: false
+
+      # Mirrors n8n's own CI build (setup-nodejs action), without its caches or SafeChain.
+      - name: Setup Node for n8n
+        if: matrix.workload == 'n8n'
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: ${{ env.N8N_NODE }}
+
+      - name: Setup pnpm
+        if: matrix.workload == 'n8n'
+        uses: pnpm/setup@703c52620218391530e48b9e8870d5c0082e1b9b # v2.1.0
+        with:
+          install: false
+          version: ${{ env.N8N_PNPM }}
+
+      - name: Install n8n dependencies
+        if: matrix.workload == 'n8n'
+        working-directory: n8n
+        env:
+          npm_config_store_dir: ${{ runner.temp }}/pnpm-store
+          # @vscode/ripgrep's postinstall downloads from GitHub and is rate-limited without a token.
+          GITHUB_TOKEN: ${{ github.token }}
+        run: pnpm install --frozen-lockfile
+
+      - name: Build n8n
+        if: matrix.workload == 'n8n'
+        working-directory: n8n
+        env:
+          NODE_OPTIONS: --max-old-space-size=7168
+        run: pnpm build
 
       - name: Remove cached base images
         if: matrix.workload == 'docker'

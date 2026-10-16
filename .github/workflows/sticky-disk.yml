@@ -1,0 +1,71 @@
+name: Sticky disk
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: sticky-disk
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  RIPGREP_REF: e89fff89ac9af12e8d4ce9d5fd07beb408ca730f # 15.2.0
+  RUST_TOOLCHAIN: 1.98.1
+
+jobs:
+  ripgrep:
+    # Run it twice from main: the first run publishes the disks, the second mounts them warm.
+    name: ripgrep / sticky disk
+    runs-on: tenki-standard-medium-4c-8g
+    timeout-minutes: 30
+    steps:
+      - name: Checkout ripgrep
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          repository: BurntSushi/ripgrep
+          ref: ${{ env.RIPGREP_REF }}
+          path: ripgrep
+          persist-credentials: false
+
+      - name: Mount cargo registry
+        id: registry
+        uses: LuxorLabs/stickydisk@fc747c42532fa53714154f1f47bb8be69b66c5d4 # v1.0.5
+        with:
+          key: ripgrep-cargo-registry
+          path: ~/.cargo/registry
+
+      - name: Mount target directory
+        id: target
+        uses: LuxorLabs/stickydisk@fc747c42532fa53714154f1f47bb8be69b66c5d4 # v1.0.5
+        with:
+          key: ripgrep-target
+          path: ripgrep/target
+
+      - name: Install Rust toolchain
+        shell: bash
+        run: |
+          if ! command -v rustup >/dev/null; then
+            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain none
+            echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+            export PATH="$HOME/.cargo/bin:$PATH"
+          fi
+          rustup toolchain install "$RUST_TOOLCHAIN" --profile minimal
+
+      - name: Build ripgrep
+        working-directory: ripgrep
+        run: rustup run "$RUST_TOOLCHAIN" cargo build --release --locked
+
+      - name: Report sticky disks
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "| Disk | Mounted | Source | Generation |"
+            echo "| --- | --- | --- | --- |"
+            echo "| cargo registry | ${{ steps.registry.outputs.mounted }} | ${{ steps.registry.outputs.source }} | ${{ steps.registry.outputs.generation }} |"
+            echo "| target | ${{ steps.target.outputs.mounted }} | ${{ steps.target.outputs.source }} | ${{ steps.target.outputs.generation }} |"
+            echo
+            du -sh ~/.cargo/registry ripgrep/target 2>/dev/null | sed 's/^/    /'
+          } >> "$GITHUB_STEP_SUMMARY"

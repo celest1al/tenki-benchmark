@@ -67,5 +67,6 @@ jobs:
             echo "| cargo registry | ${{ steps.registry.outputs.mounted }} | ${{ steps.registry.outputs.source }} | ${{ steps.registry.outputs.generation }} |"
             echo "| target | ${{ steps.target.outputs.mounted }} | ${{ steps.target.outputs.source }} | ${{ steps.target.outputs.generation }} |"
             echo
-            du -sh ~/.cargo/registry ripgrep/target 2>/dev/null | sed 's/^/    /'
+            # Each disk is ext4 with a root-owned lost+found, so du exits non-zero; the report must not fail the job.
+            du -sh ~/.cargo/registry ripgrep/target 2>/dev/null | sed 's/^/    /' || true
           } >> "$GITHUB_STEP_SUMMARY"

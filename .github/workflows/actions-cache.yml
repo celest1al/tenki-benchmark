@@ -1,0 +1,47 @@
+name: Actions cache
+
+on:
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+concurrency:
+  group: actions-cache-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  save:
+    runs-on: tenki-standard-medium-4c-8g
+    timeout-minutes: 15
+    steps:
+      - name: Create a 64 MiB cache payload
+        shell: bash
+        run: |
+          mkdir -p cache-payload
+          head -c $((64 * 1024 * 1024)) /dev/urandom > cache-payload/blob.bin
+          sha256sum cache-payload/blob.bin | tee cache-payload/blob.sha256
+
+      - name: Save cache
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: cache-payload
+          key: cache-test-${{ github.run_id }}-${{ github.run_attempt }}
+
+  restore:
+    needs: save
+    runs-on: tenki-standard-medium-4c-8g
+    timeout-minutes: 15
+    steps:
+      - name: Restore cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: cache-payload
+          key: cache-test-${{ github.run_id }}-${{ github.run_attempt }}
+          fail-on-cache-miss: true
+
+      - name: Verify payload
+        shell: bash
+        run: sha256sum -c cache-payload/blob.sha256
